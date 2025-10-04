@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NFC Date Message</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 2rem; max-width: 720px; margin: auto; }
+    .card { border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.08);}
+    h1{margin:0 0 0.5rem 0}
+    p{margin:0.5rem 0}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">Checking date…</h1>
+    <p id="message"></p>
+    <small id="debug" style="opacity:.6"></small>
+  </div>
+
+  <script>
+    // Adjust targetMonth/targetDay to the date you want (month is 1-12)
+    const targetMonth = 10; // October
+    const targetDay = 5;
+
+    // Get local date (client device)
+    const now = new Date();
+    const month = now.getMonth() + 1; // getMonth() is 0-11
+    const day = now.getDate();
+
+    // Optionally show user's timezone / date for debugging
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "unknown";
+    document.getElementById('debug').textContent = `Local date: ${now.toDateString()} (tz: ${tz})`;
+
+    if (month === targetMonth && day === targetDay) {
+      document.getElementById('title').textContent = 'Special message';
+      document.getElementById('message').textContent = '🎉 Today is October 5 — here is the special message you want visitors to see.';
+    } else {
+      document.getElementById('title').textContent = 'Regular message';
+      document.getElementById('message').textContent = 'This is the usual message for all other days.';
+    }
+  </script>
+</body>
+</html>
